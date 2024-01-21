@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BaldersGait.ViewModels.Panels.BarberShop"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BaldersGait.Views.Panels.BarberShop.BarberShopTopView"
+             x:DataType="vm:BarberShopTopViewModel">
+    <Design.DataContext>
+        <vm:BarberShopTopViewModel/>
+    </Design.DataContext>
+    
+    <UserControl.Styles>
+        <Style Selector="Border">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="45" />
+        </Style>
+        <Style Selector="TextBlock.Info">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="Beige">
+        <TextBlock Grid.Row="0" Grid.Column="0" Classes="Info">Hair Collected:</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Classes="Info" Text="{Binding HairCollectedLabel}" />
+            
+        <Button Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Command="{Binding PurchaseClippers_Click}">
+            <Border>
+                <Panel>
+                    <TextBlock Classes="Info" Text="{Binding PurchaseClippersButtonLabel}" />
+                </Panel>
+            </Border>
+        </Button>
+            
+        <Button Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding ReduceReduction_Click}">
+            <Border>
+                <TextBlock Classes="Info">Reduce Reduction (2000 Hair)</TextBlock>
+            </Border>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding UnlockChair_Click}">
+            <Border>
+                <TextBlock Classes="Info" Text="{Binding UnlockSeatButtonLabel}" />
+            </Border>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding IncreaseGrowth_Click}">
+            <Border>
+                <TextBlock Classes="Info" Text="{Binding IncreaseGrowthButtonLabel}" />
+            </Border>
+        </Button>
+    </Grid>
+</UserControl>

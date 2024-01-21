@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BaldersGait.ViewModels.Panels.BarberShop"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BaldersGait.Views.Panels.BarberShop.BarberShopChairView"
+             x:DataType="vm:BarberShopChairViewModel">
+    <Design.DataContext>
+        <vm:BarberShopChairViewModel/>
+    </Design.DataContext>
+    
+    <UserControl.Styles>
+        <Style Selector="TextBlock.HairText">
+            <Setter Property="Margin" Value="0, 0, 0, 15" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <Style Selector="TextBlock.Locked">
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Image">
+            <Setter Property="Margin" Value="20 30 20 20" />
+        </Style>
+    </UserControl.Styles>
+    
+    <Panel>
+        <Button IsVisible="{Binding IsChairUnlocked}" Command="{Binding  CutHair}" CommandParameter="0">
+            <Panel>
+                <Image Source="avares://BaldersGait/Assets/bald-head.png" />
+                <TextBlock Classes="HairText" Text="{Binding HairLengthLabel}" />
+            </Panel>
+        </Button>
+        <TextBlock Classes="HairText Locked" IsVisible="{Binding !IsChairUnlocked}">LOCKED</TextBlock>
+    </Panel>
+</UserControl>

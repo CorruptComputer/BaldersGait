@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BaldersGait.ViewModels.Panels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BaldersGait.Views.Panels.GameStatePanelView"
+             x:DataType="vm:GameStatePanelViewModel">
+    <Design.DataContext>
+        <vm:GameStatePanelViewModel/>
+    </Design.DataContext>
+    
+    <UserControl.Styles>
+        <Style Selector="Border">
+            <Setter Property="Background" Value="LightCoral" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="45" />
+        </Style>
+        <Style Selector="TextBlock.Info">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="{Binding PanelButtonBackgroundColor}">
+        <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding SaveState_Click}">
+            <Border>
+                <TextBlock Classes="Info" Text="Save State" />
+            </Border>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding LoadState_Click}">
+            <Border>
+                <TextBlock Classes="Info" Text="Load State" />
+            </Border>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding ResetState_Click}">
+            <Border>
+                <TextBlock Classes="Info" Text="Reset State" />
+            </Border>
+        </Button>
+    </Grid>
+</UserControl>
