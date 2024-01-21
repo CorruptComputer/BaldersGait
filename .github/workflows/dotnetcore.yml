@@ -3,10 +3,11 @@ name: .NET Build
 on:
   push:
     branches:
-      - "develop"
+      - develop
   pull_request:
     branches:
-      - "*"
+      - *
+  workflow_dispatch: 
 
 env:
   DOTNET_VERSION: '8.0.x'
@@ -36,12 +37,26 @@ jobs:
       # Setup
       - name: Checkout Repo
         uses: actions/checkout@v3
+        
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+          
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
       
-      # Build
-      - name: Test
+      # Test
+      - name: Test and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet test /p:CollectCoverage=true --collect:"XPlat Code Coverage;Format=opencover"
+          dotnet tool install --global dotnet-sonarscanner
+          dotnet-sonarscanner begin /k:"CorruptComputer_BaldersGait" /o:"corruptcomputer" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=./BaldersGait.UnitTests/TestResults/*/coverage.opencover.xml
+          dotnet build --no-incremental
+          dotnet test --collect:"XPlat Code Coverage;Format=opencover"
+          dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
