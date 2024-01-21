@@ -13,23 +13,6 @@ env:
   DOTNET_VERSION: '8.0.x'
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      # Setup
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-      
-      # Build
-      - name: Build
-        run: |
-          dotnet build
-  
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -60,3 +43,51 @@ jobs:
           dotnet build --no-incremental
           dotnet test --collect:"XPlat Code Coverage;Format=opencover"
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      # Build
+      - name: Build
+        run: |
+          dotnet publish --configuration Release --runtime linux-x64 --self-contained true --property PublishDir=~/publish
+          
+      # Upload
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: BaldersGait-linux-x64
+          path: ~/publish
+          
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    steps:
+      # Setup
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      # Build
+      - name: Build
+        run: |
+          dotnet publish  --configuration Release --runtime win-x64 --self-contained true --property PublishDir=publish
+
+      # Upload
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: BaldersGait-win-x64
+          path: D:\a\BaldersGait\BaldersGait\BaldersGait\publish\
