@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		.gitignore = .gitignore
 		.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
 		.github\dependabot.yml = .github\dependabot.yml
+		.github\workflows\sonarcloud.yml = .github\workflows\sonarcloud.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaldersGait", "BaldersGait\BaldersGait.csproj", "{21E7AD38-4757-44D6-9C03-3E98F987ED5F}"
