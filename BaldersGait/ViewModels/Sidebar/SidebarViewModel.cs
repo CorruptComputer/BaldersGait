@@ -5,13 +5,13 @@ using ReactiveUI;
 
 namespace BaldersGait.ViewModels.Sidebar;
 
-public class SidebarViewModel(BarberShopPanelViewModel barberShopPanel, GameStatePanelViewModel gameStatePanel, 
+public class SidebarViewModel(BarberShopPanelViewModel barberShopPanel, GameStatePanelViewModel gameStatePanel,
     PlannedChangesPanelViewModel plannedChangesPanel, KnownIssuesPanelViewModel knownIssuesPanel,
     IStateService stateService)
     : ViewModelBase
 {
     public string HairCollectedLabel => $"Hair collected:\n{stateService.GetBarberShopState().HairCollected:F2}";
-    
+
     public List<SidebarButtonViewModel> Buttons { get; } =
     [
         new(barberShopPanel),
@@ -19,7 +19,7 @@ public class SidebarViewModel(BarberShopPanelViewModel barberShopPanel, GameStat
         new(plannedChangesPanel),
         new(knownIssuesPanel)
     ];
-    
+
     protected override void RefreshUIFromState()
     {
         this.RaisePropertyChanged(nameof(HairCollectedLabel));

@@ -11,10 +11,10 @@ namespace BaldersGait.Services;
 public class StateService : IStateService
 {
     private GameState GameState { get; set; } = new();
-    
+
     private const string SaveFileName = "GameState.1";
     private string SaveFilePath => Path.Combine(_environmentService.GetUserdataDirectory(), SaveFileName);
-    
+
     private const string BackupFileName = "GameState.2";
     private string BackupFilePath => Path.Combine(_environmentService.GetUserdataDirectory(), BackupFileName);
 
@@ -23,10 +23,10 @@ public class StateService : IStateService
     public StateService(IEnvironmentService environmentService)
     {
         _environmentService = environmentService;
-        
+
         LoadState();
     }
-    
+
     public BarberShopState GetBarberShopState()
     {
         return GameState.BarberShopState;
@@ -62,10 +62,10 @@ public class StateService : IStateService
                 }
             }
         }
-        
+
         Log.Information($"Creating new save.");
         GameState = new();
-        
+
         return false;
     }
 
@@ -77,7 +77,7 @@ public class StateService : IStateService
             {
                 File.Move(SaveFilePath, BackupFilePath, overwrite: true);
             }
-            
+
             File.WriteAllText(SaveFilePath, JsonSerializer.Serialize(GameState));
             return true;
         }
@@ -85,7 +85,7 @@ public class StateService : IStateService
         {
             Log.Error($"Error writing save.");
         }
-        
+
         return false;
     }
 

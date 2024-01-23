@@ -13,7 +13,7 @@ public class BaldersGaitModule : Module
         // Services
         builder.RegisterType<EnvironmentService>().As<IEnvironmentService>().SingleInstance();
         builder.RegisterType<StateService>().As<IStateService>().SingleInstance();
-        
+
         //builder.RegisterType<PreferencesService>().As<IPreferencesService>().SingleInstance();
 
         // View Models

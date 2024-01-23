@@ -19,7 +19,7 @@ public class BarberShopChair
 
     [JsonIgnore]
     public bool ReadyToCollect => HairLength >= GetMaxHairLength();
-    
+
     public double GetHairGrowthWithScalingFactor(double baseHairGrowthPerTick)
     {
         return Math.Round(baseHairGrowthPerTick * HairGrowthScalingFactor, 3);
@@ -29,7 +29,7 @@ public class BarberShopChair
     {
         return GetHairGrowthWithScalingFactor(baseHairGrowthPerTick) > GetMaxHairLength();
     }
-    
+
     public double GetMaxHairLength()
     {
         // TODO: Add upgrades for this

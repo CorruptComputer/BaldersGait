@@ -35,7 +35,7 @@ public class MainWindowViewModel : ViewModelBase
             this.RaiseAndSetIfChanged(ref _currentPanel, value);
         }
     }
-    
+
     public MainWindowViewModel(SidebarViewModel sidebar, IStateService stateService)
     {
         if (Current != null)
@@ -50,7 +50,7 @@ public class MainWindowViewModel : ViewModelBase
         SidebarButtonViewModel button = _sidebar.Buttons.First();
         _currentPanel = button.PanelToOpen;
         Log.Information($"Starting panel: {_currentPanel.PanelName}");
-        
+
         RxApp.TaskpoolScheduler.SchedulePeriodic(TimeSpan.FromMilliseconds(10), stateService.TickState);
     }
 

@@ -15,20 +15,20 @@ public class GameStatePanelViewModel(IStateService stateService) : PanelBase
         stateService.SaveState();
         return true;
     }
-    
+
     public bool LoadState_Click()
     {
         stateService.LoadState();
         return true;
     }
-    
+
     public bool ResetState_Click()
     {
         stateService.LoadState(resetState: true);
         return true;
     }
     #endregion
-    
+
     protected override void RefreshUIFromState()
     {
         // Nothing to do

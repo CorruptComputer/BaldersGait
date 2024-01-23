@@ -8,13 +8,13 @@ namespace BaldersGait.ViewModels.Panels.BarberShop;
 
 public class BarberShopTopViewModel(IStateService stateService) : ViewModelBase
 {
-    
-    public string PurchaseClippersButtonLabel => stateService.GetBarberShopState().ClippersPurchased ? "Clippers (purchased)" : "Purchase Clippers (500 Hair)" ;
-    
+
+    public string PurchaseClippersButtonLabel => stateService.GetBarberShopState().ClippersPurchased ? "Clippers (purchased)" : "Purchase Clippers (500 Hair)";
+
     public string IncreaseScalingFactorButtonLabel => $"[{stateService.GetBarberShopState().ChairScalingFactorUpgrades}] Increase Scaling Factor ({IncreaseScalingFactorCost} Hair)";
-    public string UnlockSeatButtonLabel => ChairsUnlocked == 8 ? "All Chairs Unlocked" : $"Unlock Chair {(ChairNumbers) ChairsUnlocked} ({UnlockChairCost} hair)";
+    public string UnlockSeatButtonLabel => ChairsUnlocked == 8 ? "All Chairs Unlocked" : $"Unlock Chair {(ChairNumbers)ChairsUnlocked} ({UnlockChairCost} hair)";
     public string IncreaseGrowthButtonLabel => $"[{stateService.GetBarberShopState().HairGrowthUpgrades}] Increase Growth ({IncreaseGrowthCost} Hair)";
-    
+
     private int ChairsUnlocked => stateService.GetBarberShopState().Chairs.Count(s => s.Unlocked) + 1;
     private int IncreaseScalingFactorCost => 500 * (stateService.GetBarberShopState().ChairScalingFactorUpgrades + 1);
     private int UnlockChairCost => 200 * (ChairsUnlocked - 1);
@@ -32,17 +32,17 @@ public class BarberShopTopViewModel(IStateService stateService) : ViewModelBase
 
         return false;
     }
-    
+
     public bool IncreaseScalingFactor_Click()
     {
         if (stateService.GetBarberShopState().HairCollected < IncreaseScalingFactorCost)
         {
             return false;
         }
-        
+
         stateService.GetBarberShopState().HairCollected = Math.Round(stateService.GetBarberShopState().HairCollected - IncreaseScalingFactorCost, 3);
         stateService.GetBarberShopState().ChairScalingFactorUpgrades++;
-        
+
         return true;
     }
 
@@ -52,7 +52,7 @@ public class BarberShopTopViewModel(IStateService stateService) : ViewModelBase
         {
             return false;
         }
-        
+
         for (int i = stateService.GetBarberShopState().Chairs.Count(seat => seat.Unlocked); i < stateService.GetBarberShopState().Chairs.Count; i++)
         {
             if (!stateService.GetBarberShopState().Chairs[i].Unlocked)
@@ -65,7 +65,7 @@ public class BarberShopTopViewModel(IStateService stateService) : ViewModelBase
 
         return false;
     }
-    
+
     public bool IncreaseGrowth_Click()
     {
         if (stateService.GetBarberShopState().HairCollected < IncreaseGrowthCost)
@@ -79,11 +79,11 @@ public class BarberShopTopViewModel(IStateService stateService) : ViewModelBase
         return true;
     }
     #endregion
-    
+
     protected override void RefreshUIFromState()
     {
         this.RaisePropertyChanged(nameof(PurchaseClippersButtonLabel));
-        
+
         this.RaisePropertyChanged(nameof(IncreaseScalingFactorButtonLabel));
         this.RaisePropertyChanged(nameof(UnlockSeatButtonLabel));
         this.RaisePropertyChanged(nameof(IncreaseGrowthButtonLabel));

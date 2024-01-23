@@ -24,7 +24,7 @@ public class SidebarButtonViewModel(PanelBase panelToOpen) : ViewModelBase
         Log.Information($"Opened panel: {PanelToOpen.PanelName}");
         return true;
     }
-    
+
     protected override void RefreshUIFromState()
     {
         this.RaisePropertyChanged(nameof(BackgroundColor));

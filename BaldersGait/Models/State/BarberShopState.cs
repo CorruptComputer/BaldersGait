@@ -49,17 +49,17 @@ public class BarberShopState
     ];
 
     public int HairGrowthUpgrades { get; set; } = 0;
-    
-    public int ChairScalingFactorUpgrades { get; set; } = 0;
-    
-    public double HairCollected { get; set; } = 0;
-    
-    public bool ClippersPurchased { get; set; } = false;
-    
 
-    [JsonIgnore] 
+    public int ChairScalingFactorUpgrades { get; set; } = 0;
+
+    public double HairCollected { get; set; } = 0;
+
+    public bool ClippersPurchased { get; set; } = false;
+
+
+    [JsonIgnore]
     public double BaseHairPerTick => Math.Round(0.01 * (HairGrowthUpgrades + 1), 3);
-    
+
     public void TickMe()
     {
         Parallel.ForEach(Chairs.Where(x => x.Unlocked), seat =>
@@ -80,7 +80,7 @@ public class BarberShopState
 
                 return;
             }
-            
+
             // If we are full
             if (seat.HairLength >= maxHairLength)
             {
@@ -95,7 +95,7 @@ public class BarberShopState
                 }
                 return;
             }
-            
+
             // Else we can add it to the seats hair length
             seat.HairLength = Math.Round(seat.HairLength + hairGrowth, 3);
         });

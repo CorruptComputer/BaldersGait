@@ -6,7 +6,7 @@ public partial class MainWindow : Window
 {
     private const int SetHeight = 750;
     private const int SetWidth = 1400;
-    
+
     public MainWindow()
     {
         Width = SetHeight;

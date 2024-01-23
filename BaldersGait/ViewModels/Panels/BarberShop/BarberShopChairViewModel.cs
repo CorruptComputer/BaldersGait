@@ -18,9 +18,9 @@ public class BarberShopChairViewModel(IStateService stateService, ChairNumbers c
     public double MaxHair => ChairState.GetMaxHairLength();
 
     public string HairGrowthLabel => $"Hair Growth:\n{stateService.GetBarberShopState().BaseHairPerTick * 60:F2}\" / second";
-    
+
     public string ScalingFactorLabel => $"Scaling factor:\nx{ChairState.HairGrowthScalingFactor}";
-    
+
     public string TotalGrowthLabel => $"Total Growth:\n{ChairState.GetHairGrowthWithScalingFactor(stateService.GetBarberShopState().BaseHairPerTick) * 60:F2}\" / second";
 
     public string CurrentHairLabel => $"Current hair:\n{HairLength:F2}\" / {MaxHair:F2}\"";
@@ -38,19 +38,19 @@ public class BarberShopChairViewModel(IStateService stateService, ChairNumbers c
 
         return true;
     }
-    
+
     protected override void RefreshUIFromState()
     {
         this.RaisePropertyChanged(nameof(IsChairUnlocked));
-        
+
         this.RaisePropertyChanged(nameof(HairLength));
         this.RaisePropertyChanged(nameof(MaxHair));
-        
+
         this.RaisePropertyChanged(nameof(HairGrowthLabel));
         this.RaisePropertyChanged(nameof(ScalingFactorLabel));
         this.RaisePropertyChanged(nameof(TotalGrowthLabel));
         this.RaisePropertyChanged(nameof(CurrentHairLabel));
-        
+
         this.RaisePropertyChanged(nameof(ReadyToCollect));
         this.RaisePropertyChanged(nameof(ProductionTooHigh));
     }

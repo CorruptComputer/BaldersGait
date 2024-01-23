@@ -27,7 +27,7 @@ public class EnvironmentService : IEnvironmentService
         }
 
         _userdataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BaldersGait");
-        
+
         if (!Directory.Exists(_userdataDirectory))
         {
             Directory.CreateDirectory(_userdataDirectory);
