@@ -1,6 +1,9 @@
+using System;
+
 namespace BaldersGait.Models.State.BarberShop;
 
-public enum SeatNumber
+[Serializable]
+public enum ChairNumbers
 {
     Unknown = -1,
     One = 1,

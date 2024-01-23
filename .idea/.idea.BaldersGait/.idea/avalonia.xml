@@ -3,7 +3,17 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="BaldersGait/Views/MainWindow.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/BarberShop/BarberShopBottomView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/BarberShop/BarberShopChairView.axaml" value="BaldersGait/BaldersGait.csproj" />
         <entry key="BaldersGait/Views/Panels/BarberShop/BarberShopTopView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/BarberShopPanelView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/GameStatePanelView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/GreenPanelView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/KnownIssuesPanelView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Panels/PlannedChangesPanelView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Sidebar/SidebarButtonView.axaml" value="BaldersGait/BaldersGait.csproj" />
+        <entry key="BaldersGait/Views/Sidebar/SidebarView.axaml" value="BaldersGait/BaldersGait.csproj" />
       </map>
     </option>
   </component>

@@ -28,4 +28,9 @@ public class GameStatePanelViewModel(IStateService stateService) : PanelBase
         return true;
     }
     #endregion
+    
+    protected override void RefreshUIFromState()
+    {
+        // Nothing to do
+    }
 }

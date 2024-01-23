@@ -11,7 +11,7 @@
     </Design.DataContext>
     
     <UserControl.Styles>
-        <Style Selector="Border">
+        <Style Selector="Border.StateButton">
             <Setter Property="Background" Value="LightCoral" />
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="2" />
@@ -27,17 +27,17 @@
     
     <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="{Binding PanelButtonBackgroundColor}">
         <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding SaveState_Click}">
-            <Border>
+            <Border Classes="StateButton">
                 <TextBlock Classes="Info" Text="Save State" />
             </Border>
         </Button>
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding LoadState_Click}">
-            <Border>
+            <Border Classes="StateButton">
                 <TextBlock Classes="Info" Text="Load State" />
             </Border>
         </Button>
         <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding ResetState_Click}">
-            <Border>
+            <Border Classes="StateButton">
                 <TextBlock Classes="Info" Text="Reset State" />
             </Border>
         </Button>

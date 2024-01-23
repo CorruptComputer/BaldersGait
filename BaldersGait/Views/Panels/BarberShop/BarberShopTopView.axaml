@@ -11,7 +11,7 @@
     </Design.DataContext>
     
     <UserControl.Styles>
-        <Style Selector="Border">
+        <Style Selector="Border.ButtonBorder">
             <Setter Property="Background" Value="LightBlue" />
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="2" />
@@ -25,30 +25,29 @@
         </Style>
     </UserControl.Styles>
     
-    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="Beige">
-        <TextBlock Grid.Row="0" Grid.Column="0" Classes="Info">Hair Collected:</TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="1" Classes="Info" Text="{Binding HairCollectedLabel}" />
+    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="SteelBlue">
+        
             
         <Button Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Command="{Binding PurchaseClippers_Click}">
-            <Border>
+            <Border Classes="ButtonBorder">
                 <Panel>
                     <TextBlock Classes="Info" Text="{Binding PurchaseClippersButtonLabel}" />
                 </Panel>
             </Border>
         </Button>
             
-        <Button Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding ReduceReduction_Click}">
-            <Border>
-                <TextBlock Classes="Info">Reduce Reduction (2000 Hair)</TextBlock>
+        <Button Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding IncreaseScalingFactor_Click}">
+            <Border Classes="ButtonBorder">
+                <TextBlock Classes="Info" Text="{Binding IncreaseScalingFactorButtonLabel}"/>
             </Border>
         </Button>
         <Button Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding UnlockChair_Click}">
-            <Border>
+            <Border Classes="ButtonBorder">
                 <TextBlock Classes="Info" Text="{Binding UnlockSeatButtonLabel}" />
             </Border>
         </Button>
         <Button Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding IncreaseGrowth_Click}">
-            <Border>
+            <Border Classes="ButtonBorder">
                 <TextBlock Classes="Info" Text="{Binding IncreaseGrowthButtonLabel}" />
             </Border>
         </Button>

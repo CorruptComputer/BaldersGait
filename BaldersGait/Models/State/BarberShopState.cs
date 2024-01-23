@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using BaldersGait.Consts;
 using BaldersGait.Models.State.BarberShop;
 
 namespace BaldersGait.Models.State;
@@ -11,78 +10,94 @@ namespace BaldersGait.Models.State;
 [Serializable]
 public class BarberShopState
 {
-    public List<BarberShopSeat> Seats { get; set; } =
+    public List<BarberShopChair> Chairs { get; set; } =
     [
         new()
         {
-            SeatNumber = SeatNumber.One,
+            ChairNumber = ChairNumbers.One,
             Unlocked = true
         },
         new()
         {
-            SeatNumber = SeatNumber.Two,
+            ChairNumber = ChairNumbers.Two,
         },
         new()
         {
-            SeatNumber = SeatNumber.Three,
+            ChairNumber = ChairNumbers.Three,
         },
         new()
         {
-            SeatNumber = SeatNumber.Four,
+            ChairNumber = ChairNumbers.Four,
         },
         new()
         {
-            SeatNumber = SeatNumber.Five,
+            ChairNumber = ChairNumbers.Five,
         },
         new()
         {
-            SeatNumber = SeatNumber.Six,
+            ChairNumber = ChairNumbers.Six,
         },
         new()
         {
-            SeatNumber = SeatNumber.Seven,
+            ChairNumber = ChairNumbers.Seven,
         },
         new()
         {
-            SeatNumber = SeatNumber.Eight,
+            ChairNumber = ChairNumbers.Eight,
         }
 
     ];
 
     public int HairGrowthUpgrades { get; set; } = 0;
     
-    public int ReduceReductionUpgrades { get; set; } = 0;
+    public int ChairScalingFactorUpgrades { get; set; } = 0;
     
     public double HairCollected { get; set; } = 0;
     
     public bool ClippersPurchased { get; set; } = false;
     
-    [JsonIgnore]
-    public double HairGrowth => Math.Round(BarberShopConsts.BaseHairGrowthRate * (HairGrowthUpgrades+1), 3);
+
+    [JsonIgnore] 
+    public double BaseHairPerTick => Math.Round(0.01 * (HairGrowthUpgrades + 1), 3);
     
     public void TickMe()
     {
-        Parallel.ForEach(Seats.Where(x => x.Unlocked), seat =>
+        Parallel.ForEach(Chairs.Where(x => x.Unlocked), seat =>
         {
-            if (seat.HairLength < BarberShopConsts.MaxHairLength)
+            // TODO: Passing in 'this' works but just feels awful
+            double hairGrowth = seat.GetHairGrowthWithScalingFactor(BaseHairPerTick);
+            double maxHairLength = seat.GetMaxHairLength();
+
+            // If we are making more per tick than we can hold
+            if (hairGrowth > maxHairLength)
             {
-                double growthRate = HairGrowth * (seat.SeatNumber == SeatNumber.One ? 1 : Math.Pow(BarberShopConsts.BaseReduction, (int)seat.SeatNumber));
-                double newLength = Math.Round(seat.HairLength + growthRate, 3);
-                if (newLength >= BarberShopConsts.MaxHairLength)
+                seat.HairLength = maxHairLength;
+
+                if (ClippersPurchased)
                 {
-                    if (ClippersPurchased)
-                    {
-                        HairCollected = Math.Round(HairCollected + BarberShopConsts.MaxHairLength, 3);
-                        newLength = 0;
-                    }
-                    else
-                    {
-                        newLength = BarberShopConsts.MaxHairLength;
-                    }
+                    HairCollected = Math.Round(HairCollected + seat.HairLength, 3);
                 }
-            
-                seat.HairLength = newLength;
+
+                return;
             }
+            
+            // If we are full
+            if (seat.HairLength >= maxHairLength)
+            {
+                if (ClippersPurchased)
+                {
+                    HairCollected = Math.Round(HairCollected + maxHairLength, 3);
+                    seat.HairLength = 0;
+                }
+                else
+                {
+                    seat.HairLength = maxHairLength;
+                }
+                return;
+            }
+            
+            // Else we can add it to the seats hair length
+            seat.HairLength = Math.Round(seat.HairLength + hairGrowth, 3);
         });
     }
 }

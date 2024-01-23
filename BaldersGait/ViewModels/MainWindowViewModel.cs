@@ -32,18 +32,6 @@ public class MainWindowViewModel : ViewModelBase
                 return;
             }
 
-            Parallel.ForEach(_sidebar.Buttons, sidebarButton =>
-            {
-                if (sidebarButton.ButtonText != value.PanelName)
-                {
-                    sidebarButton.ResetBackground();
-                }
-                else
-                {
-                    sidebarButton.SetBackgroundSelected();
-                }
-            });
-
             this.RaiseAndSetIfChanged(ref _currentPanel, value);
         }
     }
@@ -62,8 +50,12 @@ public class MainWindowViewModel : ViewModelBase
         SidebarButtonViewModel button = _sidebar.Buttons.First();
         _currentPanel = button.PanelToOpen;
         Log.Information($"Starting panel: {_currentPanel.PanelName}");
-        button.SetBackgroundSelected();
         
-        RxApp.TaskpoolScheduler.SchedulePeriodic(TimeSpan.FromMilliseconds(100), stateService.TickState);
+        RxApp.TaskpoolScheduler.SchedulePeriodic(TimeSpan.FromMilliseconds(10), stateService.TickState);
+    }
+
+    protected override void RefreshUIFromState()
+    {
+        // Nothing to do
     }
 }

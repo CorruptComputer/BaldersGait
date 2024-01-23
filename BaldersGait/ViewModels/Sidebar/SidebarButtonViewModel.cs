@@ -9,27 +9,9 @@ public class SidebarButtonViewModel(PanelBase panelToOpen) : ViewModelBase
 {
     public string ButtonText { get; } = panelToOpen.PanelName;
 
-    private IBrush _backgroundColor = panelToOpen.PanelButtonBackgroundColor ?? Brushes.SlateGray;
-
-    public IBrush BackgroundColor
-    {
-        get => _backgroundColor;
-        set => this.RaiseAndSetIfChanged(ref _backgroundColor, value);
-    }
+    public IBrush BackgroundColor { get; private set; } = panelToOpen.PanelButtonBackgroundColor ?? Brushes.SlateGray;
 
     public PanelBase PanelToOpen { get; } = panelToOpen;
-
-    private IBrush OriginalBackgroundColor { get; } = panelToOpen.PanelButtonBackgroundColor ?? Brushes.SlateGray;
-
-    public void SetBackgroundSelected()
-    {
-        BackgroundColor = Brushes.LightSlateGray;
-    }
-
-    public void ResetBackground()
-    {
-        BackgroundColor = OriginalBackgroundColor;
-    }
 
     public bool OnClick()
     {
@@ -41,5 +23,10 @@ public class SidebarButtonViewModel(PanelBase panelToOpen) : ViewModelBase
         MainWindowViewModel.Current.CurrentPanel = PanelToOpen;
         Log.Information($"Opened panel: {PanelToOpen.PanelName}");
         return true;
+    }
+    
+    protected override void RefreshUIFromState()
+    {
+        this.RaisePropertyChanged(nameof(BackgroundColor));
     }
 }

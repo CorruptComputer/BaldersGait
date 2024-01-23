@@ -1,43 +1,57 @@
 using System;
 using System.Linq;
-using System.Reactive.Concurrency;
 using BaldersGait.Models.State.BarberShop;
 using BaldersGait.Services.Interface;
 using ReactiveUI;
 
 namespace BaldersGait.ViewModels.Panels.BarberShop;
 
-public class BarberShopChairViewModel : ViewModelBase
+public class BarberShopChairViewModel(IStateService stateService, ChairNumbers chairNumber) : ViewModelBase
 {
-    public SeatNumber SeatNumber { get; }
+    public ChairNumbers ChairNumber { get; } = chairNumber;
 
-    public string HairLengthLabel =>
-        $"{_stateService.GetBarberShopState().Seats.First(s => s.SeatNumber == SeatNumber).HairLength:F3}\"";
+    private BarberShopChair ChairState =>
+        stateService.GetBarberShopState().Chairs.First(s => s.ChairNumber == ChairNumber);
 
-    public bool IsChairUnlocked =>
-        _stateService.GetBarberShopState().Seats.First(s => s.SeatNumber == SeatNumber).Unlocked;
+    public string ChairNumberLabel => $"Chair {ChairNumber}";
+    public double HairLength => ChairState.HairLength;
+    public double MaxHair => ChairState.GetMaxHairLength();
+
+    public string HairGrowthLabel => $"Hair Growth:\n{stateService.GetBarberShopState().BaseHairPerTick * 60:F2}\" / second";
     
-    private readonly IStateService _stateService;
-
-    public BarberShopChairViewModel(IStateService stateService, SeatNumber seatNumber)
-    {
-        SeatNumber = seatNumber;
-        _stateService = stateService;
-        
-        RxApp.MainThreadScheduler.SchedulePeriodic(TimeSpan.FromMilliseconds(100), RefreshUIFromState);
-    }
+    public string ScalingFactorLabel => $"Scaling factor:\nx{ChairState.HairGrowthScalingFactor}";
     
+    public string TotalGrowthLabel => $"Total Growth:\n{ChairState.GetHairGrowthWithScalingFactor(stateService.GetBarberShopState().BaseHairPerTick) * 60:F2}\" / second";
+
+    public string CurrentHairLabel => $"Current hair:\n{HairLength:F2}\" / {MaxHair:F2}\"";
+
+    public bool IsChairUnlocked => ChairState.Unlocked;
+
+    public bool ReadyToCollect => ChairState.ReadyToCollect && !ProductionTooHigh;
+
+    public bool ProductionTooHigh => ChairState.IsProductionTooHigh(stateService.GetBarberShopState().BaseHairPerTick);
+
     public bool CutHair()
     {
-        _stateService.GetBarberShopState().HairCollected = Math.Round(_stateService.GetBarberShopState().HairCollected + _stateService.GetBarberShopState().Seats.First(s => s.SeatNumber == SeatNumber).HairLength, 3);
-        _stateService.GetBarberShopState().Seats.First(s => s.SeatNumber == SeatNumber).HairLength = 0;
+        stateService.GetBarberShopState().HairCollected = Math.Round(stateService.GetBarberShopState().HairCollected + ChairState.HairLength, 3);
+        ChairState.HairLength = 0;
 
         return true;
     }
     
-    private void RefreshUIFromState()
+    protected override void RefreshUIFromState()
     {
-        this.RaisePropertyChanged(nameof(HairLengthLabel));
         this.RaisePropertyChanged(nameof(IsChairUnlocked));
+        
+        this.RaisePropertyChanged(nameof(HairLength));
+        this.RaisePropertyChanged(nameof(MaxHair));
+        
+        this.RaisePropertyChanged(nameof(HairGrowthLabel));
+        this.RaisePropertyChanged(nameof(ScalingFactorLabel));
+        this.RaisePropertyChanged(nameof(TotalGrowthLabel));
+        this.RaisePropertyChanged(nameof(CurrentHairLabel));
+        
+        this.RaisePropertyChanged(nameof(ReadyToCollect));
+        this.RaisePropertyChanged(nameof(ProductionTooHigh));
     }
 }

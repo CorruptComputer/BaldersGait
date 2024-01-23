@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace BaldersGait.Views.Panels;
 
-public partial class GreenPanelView : UserControl
+public partial class KnownIssuesPanelView : UserControl
 {
-    public GreenPanelView()
+    public KnownIssuesPanelView()
     {
         InitializeComponent();
     }

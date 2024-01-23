@@ -10,8 +10,9 @@
         <vm:BarberShopPanelViewModel/>
     </Design.DataContext>
     
-    <Grid RowDefinitions="150,*" ColumnDefinitions="*">
+    <Grid RowDefinitions="150,3,*" ColumnDefinitions="*">
         <ContentControl Grid.Row="0" Content="{Binding TopView}" />
-        <ContentControl Grid.Row="1" Content="{Binding BottomView}" />
+        <Line Grid.Row="1" />
+        <ContentControl Grid.Row="2" Content="{Binding BottomView}" />
     </Grid>
 </UserControl>
