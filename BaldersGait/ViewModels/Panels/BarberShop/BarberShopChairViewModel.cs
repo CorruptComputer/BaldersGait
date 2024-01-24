@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using BaldersGait.Models.State.BarberShop;
 using BaldersGait.Services.Interface;
 using ReactiveUI;

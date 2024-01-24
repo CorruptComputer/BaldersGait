@@ -1,5 +1,4 @@
-using System;
-using System.IO;
+using System.Reactive.Concurrency;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using BaldersGait.Models.State;
@@ -20,11 +19,16 @@ public class StateService : IStateService
 
     private readonly IEnvironmentService _environmentService;
 
-    public StateService(IEnvironmentService environmentService)
+    public StateService(IEnvironmentService environmentService, bool autoTickState = true)
     {
         _environmentService = environmentService;
 
         LoadState();
+
+        if (autoTickState)
+        {
+            TaskPoolScheduler.Default.SchedulePeriodic(TimeSpan.FromMilliseconds(10), TickState);
+        }
     }
 
     public BarberShopState GetBarberShopState()
@@ -53,7 +57,7 @@ public class StateService : IStateService
             {
                 try
                 {
-                    GameState = JsonSerializer.Deserialize<GameState>(File.ReadAllText(SaveFilePath)) ?? throw new SerializationException();
+                    GameState = JsonSerializer.Deserialize<GameState>(File.ReadAllText(BackupFilePath)) ?? throw new SerializationException();
                     return true;
                 }
                 catch (Exception e) when (e is JsonException or SerializationException)

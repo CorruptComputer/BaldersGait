@@ -1,4 +1,3 @@
-using System.IO;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;

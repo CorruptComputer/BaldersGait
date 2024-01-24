@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reactive.Concurrency;
-using System.Threading.Tasks;
-using BaldersGait.Services.Interface;
+﻿using BaldersGait.Services.Interface;
 using BaldersGait.ViewModels.Panels;
 using BaldersGait.ViewModels.Sidebar;
 using ReactiveUI;
@@ -40,8 +36,9 @@ public class MainWindowViewModel : ViewModelBase
     {
         if (Current != null)
         {
-            Log.Error($"More than one {nameof(MainWindowViewModel)} has been created");
-            throw new();
+            const string message = $"More than one {nameof(MainWindowViewModel)} has been created";
+            Log.Error(message);
+            throw new BaldersGaitException(message, false);
         }
 
         Current = this;
@@ -50,8 +47,6 @@ public class MainWindowViewModel : ViewModelBase
         SidebarButtonViewModel button = _sidebar.Buttons.First();
         _currentPanel = button.PanelToOpen;
         Log.Information($"Starting panel: {_currentPanel.PanelName}");
-
-        RxApp.TaskpoolScheduler.SchedulePeriodic(TimeSpan.FromMilliseconds(10), stateService.TickState);
     }
 
     protected override void RefreshUIFromState()

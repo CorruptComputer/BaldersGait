@@ -1,5 +1,3 @@
-using System;
-
 namespace BaldersGait.Models.State.BarberShop;
 
 [Serializable]

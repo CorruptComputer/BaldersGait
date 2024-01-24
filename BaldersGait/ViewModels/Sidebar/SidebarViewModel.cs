@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using BaldersGait.Services.Interface;
 using BaldersGait.ViewModels.Panels;
 using ReactiveUI;
 
 namespace BaldersGait.ViewModels.Sidebar;
 
-public class SidebarViewModel(BarberShopPanelViewModel barberShopPanel, GameStatePanelViewModel gameStatePanel,
+public class SidebarViewModel(BarberShopPanelViewModel barberShopPanel, UpgradeShopPanelViewModel upgradeShopPanel, GameStatePanelViewModel gameStatePanel,
     PlannedChangesPanelViewModel plannedChangesPanel, KnownIssuesPanelViewModel knownIssuesPanel,
     IStateService stateService)
     : ViewModelBase
@@ -15,6 +14,7 @@ public class SidebarViewModel(BarberShopPanelViewModel barberShopPanel, GameStat
     public List<SidebarButtonViewModel> Buttons { get; } =
     [
         new(barberShopPanel),
+        new(upgradeShopPanel),
         new(gameStatePanel),
         new(plannedChangesPanel),
         new(knownIssuesPanel)

@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        
+        <OutputType>WinExe</OutputType>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-
         <PublishSingleFile Condition="'$(Configuration)' != 'Debug'">true</PublishSingleFile>
         <SelfContained Condition="'$(Configuration)' != 'Debug'">true</SelfContained>
     </PropertyGroup>
@@ -14,7 +16,6 @@
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
     </ItemGroup>
-
 
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.0.0" />
@@ -30,7 +31,6 @@
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     </ItemGroup>
 
-
     <ItemGroup>
       <Compile Update="Views\Sidebar\SidebarButtonView.axaml.cs">
         <DependentUpon>SidebarButtonView.axaml</DependentUpon>
@@ -45,8 +45,8 @@
       </Compile>
     </ItemGroup>
 
-
     <ItemGroup>
-      <Folder Include="Consts\" />
+      <Folder Include="ViewModels\Panels\UpgradeShop\" />
+      <Folder Include="Views\Panels\UpgradeShop\" />
     </ItemGroup>
 </Project>

@@ -4,6 +4,9 @@ using BaldersGait.Services.Interface;
 
 namespace BaldersGait;
 
+/// <summary>
+///   Main module for the game, things get registered with Autofac here.
+/// </summary>
 public class BaldersGaitModule : Module
 {
     protected override void Load(ContainerBuilder builder)

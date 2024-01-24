@@ -3,16 +3,33 @@
              xmlns:vm="using:BaldersGait.ViewModels.Panels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="750"
              x:Class="BaldersGait.Views.Panels.BarberShopPanelView"
              x:DataType="vm:BarberShopPanelViewModel">
     <Design.DataContext>
         <vm:BarberShopPanelViewModel/>
     </Design.DataContext>
     
-    <Grid RowDefinitions="150,3,*" ColumnDefinitions="*">
-        <ContentControl Grid.Row="0" Content="{Binding TopView}" />
-        <Line Grid.Row="1" />
-        <ContentControl Grid.Row="2" Content="{Binding BottomView}" />
+    <UserControl.Styles>
+        <Style Selector="Border.Chair">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="45" />
+        </Style>
+    </UserControl.Styles>
+    
+    
+    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*,*" Background="{Binding PanelButtonBackgroundColor}">
+        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding ChairOne}" />
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding ChairTwo}" />
+        <ContentControl Grid.Row="0" Grid.Column="2" Content="{Binding ChairThree}" />
+        <ContentControl Grid.Row="0" Grid.Column="3" Content="{Binding ChairFour}" />
+        
+        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding ChairFive}" />
+        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding ChairSix}" />
+        <ContentControl Grid.Row="1" Grid.Column="2" Content="{Binding ChairSeven}" />
+        <ContentControl Grid.Row="1" Grid.Column="3" Content="{Binding ChairEight}" />
     </Grid>
 </UserControl>
