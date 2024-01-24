@@ -17,6 +17,8 @@ jobs:
       # Setup
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Need to disable shallow clone for SonarCloud to scan properly: https://stackoverflow.com/a/62500400
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
