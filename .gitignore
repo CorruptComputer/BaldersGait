@@ -6,3 +6,4 @@ riderModule.iml
 *.user
 *opencover.xml
 coverage.xml
+.idea/
