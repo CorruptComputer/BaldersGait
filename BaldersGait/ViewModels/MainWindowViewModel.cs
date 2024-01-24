@@ -1,4 +1,5 @@
-﻿using BaldersGait.Services.Interface;
+﻿using BaldersGait.Models.Enums;
+using BaldersGait.Services.Interface;
 using BaldersGait.ViewModels.Panels;
 using BaldersGait.ViewModels.Sidebar;
 using ReactiveUI;
@@ -44,8 +45,9 @@ public class MainWindowViewModel : ViewModelBase
         Current = this;
         _sidebar = sidebar;
 
-        SidebarButtonViewModel button = _sidebar.Buttons.First();
-        _currentPanel = button.PanelToOpen;
+        SidebarButtonViewModel button = _sidebar.Buttons.First(x => x.ButtonType == ButtonTypes.Panel);
+
+        _currentPanel = button?.PanelToOpen ?? throw new BaldersGaitException("Unable to find starting panel.", false);
         Log.Information($"Starting panel: {_currentPanel.PanelName}");
     }
 

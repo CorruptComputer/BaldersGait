@@ -40,9 +40,6 @@
         <DependentUpon>SidebarView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\Panels\KnownIssuesPanelView.axaml.cs">
-        <DependentUpon>BluePanelView.axaml</DependentUpon>
-      </Compile>
     </ItemGroup>
 
     <ItemGroup>
