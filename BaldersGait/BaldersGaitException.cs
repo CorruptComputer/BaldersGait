@@ -12,11 +12,11 @@ public class BaldersGaitException : ApplicationException
     ///   Flag for if the error that happened is recoverable from.
     /// </summary>
     public bool Recoverable { get; init; }
-    
+
     public BaldersGaitException(string message, bool recoverable, [CallerMemberName] string thrownBy = "", [CallerLineNumber] int thrownAt = 0) : base(message)
     {
         Recoverable = recoverable;
-        
+
         Log.Error($"{thrownBy}:{thrownAt}: {message}");
     }
 }

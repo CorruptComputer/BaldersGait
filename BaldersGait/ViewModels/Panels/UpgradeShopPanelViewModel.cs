@@ -13,19 +13,19 @@ public class UpgradeShopPanelViewModel(IStateService stateService) : PanelBase
     // Increase Growth
     private int IncreaseGrowthCost => 100 * (stateService.GetBarberShopState().HairGrowthUpgrades + 1);
     public string IncreaseGrowthButtonLabel => $"[{stateService.GetBarberShopState().HairGrowthUpgrades}] Increase Growth ({IncreaseGrowthCost} Hair)";
-    
+
     // Unlock Chair
     private int ChairsUnlocked => stateService.GetBarberShopState().Chairs.Count(s => s.Unlocked) + 1;
     private int UnlockChairCost => 200 * (ChairsUnlocked - 1);
     public string UnlockSeatButtonLabel => ChairsUnlocked == 8 ? "All Chairs Unlocked" : $"Unlock Chair {(ChairNumbers)ChairsUnlocked} ({UnlockChairCost} hair)";
-    
+
     // Increase Scaling Factor
     private int IncreaseScalingFactorCost => 500 * (stateService.GetBarberShopState().ChairScalingFactorUpgrades + 1);
     public string IncreaseScalingFactorButtonLabel => $"[{stateService.GetBarberShopState().ChairScalingFactorUpgrades}] Increase Scaling Factor ({IncreaseScalingFactorCost} Hair)";
-    
+
     // Purchase Clippers
     public string PurchaseClippersButtonLabel => stateService.GetBarberShopState().ClippersPurchased ? "Clippers (purchased)" : "Purchase Clippers (500 Hair)";
-    
+
     #region Click Events
     public bool PurchaseClippers_Click()
     {
@@ -33,7 +33,7 @@ public class UpgradeShopPanelViewModel(IStateService stateService) : PanelBase
         //{
         //    return false;
         //}
-        
+
         //stateService.GetBarberShopState().HairCollected = Math.Round(stateService.GetBarberShopState().HairCollected - 500, 3);
         stateService.GetBarberShopState().ClippersPurchased = true;
 
@@ -86,7 +86,7 @@ public class UpgradeShopPanelViewModel(IStateService stateService) : PanelBase
         return true;
     }
     #endregion
-    
+
     protected override void RefreshUIFromState()
     {
         this.RaisePropertyChanged(nameof(PurchaseClippersButtonLabel));
