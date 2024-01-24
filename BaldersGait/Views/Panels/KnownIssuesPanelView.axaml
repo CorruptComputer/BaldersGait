@@ -23,6 +23,9 @@
             If you try to resize the window it might try to fly away from you.<LineBreak />
             <LineBreak />
             'Purchase Clippers' costs nothing, this is intended for now.<LineBreak />
+            <LineBreak />
+            'Increase Scaling Factor' upgrade takes your hair but does nothing, not sure how I want the math for this to look yet.<LineBreak />
+            These upgrades are still being added to your save, though they just don't do anything.<LineBreak />
         </TextBlock>
     </Panel>
 </UserControl>
