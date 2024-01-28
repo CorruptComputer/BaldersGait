@@ -1,10 +1,10 @@
-using BaldersGait.Models.State;
+using BaldersGait.Models;
 
 namespace BaldersGait.Services.Interface;
 
 public interface IStateService
 {
-    public BarberShopState GetBarberShopState();
+    public GameState GetGameState();
 
     public bool LoadState(bool resetState = false);
 

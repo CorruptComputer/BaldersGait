@@ -1,7 +1,7 @@
 using System.Reactive.Concurrency;
 using System.Runtime.Serialization;
 using System.Text.Json;
-using BaldersGait.Models.State;
+using BaldersGait.Models;
 using BaldersGait.Services.Interface;
 using Serilog;
 
@@ -31,9 +31,9 @@ public class StateService : IStateService
         }
     }
 
-    public BarberShopState GetBarberShopState()
+    public GameState GetGameState()
     {
-        return GameState.BarberShopState;
+        return GameState;
     }
 
     public bool LoadState(bool resetState = false)

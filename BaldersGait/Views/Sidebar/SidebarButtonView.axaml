@@ -10,7 +10,7 @@
         <vm:SidebarButtonViewModel/>
     </Design.DataContext>
     
-    <Button Background="{Binding BackgroundColor}" Command="{Binding OnClick}">
+    <Button Background="{Binding BackgroundColor}" Command="{Binding OnClick}" IsVisible="{Binding IsVisible}">
         <TextBlock Text="{Binding ButtonText}" TextAlignment="Center" />
     </Button>
 </UserControl>

@@ -25,30 +25,52 @@
         </Style>
     </UserControl.Styles>
     
-    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="{Binding PanelButtonBackgroundColor}">
-        
-            
-        <Button Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Command="{Binding PurchaseClippers_Click}">
+    <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Background="{Binding PanelButtonBackgroundColor}">
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding PurchaseClippers_Click}" IsVisible="{Binding PurchaseClippersButtonVisible}">
             <Border Classes="ButtonBorder">
                 <Panel>
                     <TextBlock Classes="Info" Text="{Binding PurchaseClippersButtonLabel}" />
                 </Panel>
             </Border>
         </Button>
-            
-        <Button Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding IncreaseScalingFactor_Click}">
+        
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding PurchaseWigShop_Click}" IsVisible="{Binding PurchaseWigShopButtonVisible}">
             <Border Classes="ButtonBorder">
-                <TextBlock Classes="Info" Text="{Binding IncreaseScalingFactorButtonLabel}"/>
+                <Panel>
+                    <TextBlock Classes="Info" Text="{Binding PurchaseWigShopButtonLabel}" />
+                </Panel>
             </Border>
         </Button>
-        <Button Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding UnlockChair_Click}">
+        
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding PurchaseStylists_Click}" IsVisible="{Binding PurchaseStylistsButtonVisible}">
+            <Border Classes="ButtonBorder">
+                <Panel>
+                    <TextBlock Classes="Info" Text="{Binding PurchaseStylistsButtonLabel}" />
+                </Panel>
+            </Border>
+        </Button>
+        
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding UnlockChair_Click}">
             <Border Classes="ButtonBorder">
                 <TextBlock Classes="Info" Text="{Binding UnlockSeatButtonLabel}" />
             </Border>
         </Button>
-        <Button Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" Command="{Binding IncreaseGrowth_Click}">
+        
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding IncreaseGrowth_Click}">
             <Border Classes="ButtonBorder">
                 <TextBlock Classes="Info" Text="{Binding IncreaseGrowthButtonLabel}" />
+            </Border>
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding IncreaseScalingFactor_Click}">
+            <Border Classes="ButtonBorder">
+                <TextBlock Classes="Info" Text="{Binding IncreaseScalingFactorButtonLabel}"/>
+            </Border>
+        </Button>
+        
+        <Button Grid.Row="2" Grid.Column="2" Command="{Binding IncreaseMaxHair_Click}">
+            <Border Classes="ButtonBorder">
+                <TextBlock Classes="Info" Text="{Binding IncreaseMaxHairButtonLabel}"/>
             </Border>
         </Button>
     </Grid>

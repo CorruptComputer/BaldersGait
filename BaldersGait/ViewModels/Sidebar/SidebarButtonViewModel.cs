@@ -15,6 +15,8 @@ public class SidebarButtonViewModel : ViewModelBase
 
     public ButtonTypes ButtonType { get; init; }
 
+    public bool IsVisible => PanelToOpen?.IsVisible ?? true;
+
     public PanelBase? PanelToOpen { get; init; }
 
     public string? LinkUrl { get; init; }
@@ -68,5 +70,6 @@ public class SidebarButtonViewModel : ViewModelBase
     {
         this.RaisePropertyChanged(nameof(ButtonText));
         this.RaisePropertyChanged(nameof(BackgroundColor));
+        this.RaisePropertyChanged(nameof(IsVisible));
     }
 }

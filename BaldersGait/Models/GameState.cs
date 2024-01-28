@@ -1,11 +1,22 @@
 using System.Text.Json.Serialization;
-using BaldersGait.Models.State.BarberShop;
+using BaldersGait.Models.BarberShop;
+using BaldersGait.Models.Enums;
+using BaldersGait.Models.Stylists;
 
-namespace BaldersGait.Models.State;
+namespace BaldersGait.Models;
 
 [Serializable]
-public class BarberShopState
+public class GameState
 {
+    [JsonIgnore] 
+    private static readonly Random Random = new();
+    
+    #region Saved State
+    public double HairCollected { get; set; } = 0;
+
+    public double MoneyCollected { get; set; } = 0;
+
+    #region Barber Shop
     public List<BarberShopChair> Chairs { get; set; } =
     [
         new()
@@ -43,26 +54,48 @@ public class BarberShopState
         }
 
     ];
+    #endregion
 
+    #region Upgrades Shop
+    public bool ClippersPurchased { get; set; } = false;
+    public bool WigShopPurchased { get; set; } = false;
+    public bool StylistsPurchased { get; set; } = false;
+    
     public int HairGrowthUpgrades { get; set; } = 0;
 
-    public int ChairScalingFactorUpgrades { get; set; } = 0;
+    public int ScalingFactorUpgrades { get; set; } = 0;
+    
+    public int MaxHairUpgrades { get; set; } = 0;
+    #endregion
 
-    public double HairCollected { get; set; } = 0;
+    #region Stylists
+    public List<Stylist> StylistsForHire { get; set; } = Stylist.RollNRandomStylists(Random, 0, 4);
+    
+    public int StylistsForHireRerollCount { get; set; } = 0;
+    #endregion
+    #endregion
 
-    public bool ClippersPurchased { get; set; } = false;
-
-
+    #region Calculated State
     [JsonIgnore]
     public double BaseHairPerTick => Math.Round(0.01 * (HairGrowthUpgrades + 1), 3);
 
+    [JsonIgnore] 
+    public bool IsMoneyVisible => WigShopPurchased;
+
+    [JsonIgnore]
+    public bool IsStylistsButtonVisible => StylistsPurchased;
+    
+    [JsonIgnore]
+    public bool IsWigShopButtonVisible => WigShopPurchased;
+    
+    #endregion
+    
     public void TickMe()
     {
         Parallel.ForEach(Chairs.Where(x => x.Unlocked), seat =>
         {
-            // TODO: Passing in 'this' works but just feels awful
-            double hairGrowth = seat.GetHairGrowthWithScalingFactor(BaseHairPerTick);
-            double maxHairLength = seat.GetMaxHairLength();
+            double hairGrowth = seat.GetHairGrowthWithScalingFactor(BaseHairPerTick, ScalingFactorUpgrades);
+            double maxHairLength = seat.GetMaxHairLength(MaxHairUpgrades);
 
             // If we are making more per tick than we can hold
             if (hairGrowth > maxHairLength)
@@ -89,6 +122,7 @@ public class BarberShopState
                 {
                     seat.HairLength = maxHairLength;
                 }
+
                 return;
             }
 

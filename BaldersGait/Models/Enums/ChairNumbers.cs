@@ -1,4 +1,4 @@
-namespace BaldersGait.Models.State.BarberShop;
+namespace BaldersGait.Models.Enums;
 
 [Serializable]
 public enum ChairNumbers

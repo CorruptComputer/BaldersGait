@@ -1,5 +1,5 @@
 using Avalonia.Media;
-using BaldersGait.Models.State.BarberShop;
+using BaldersGait.Models.Enums;
 using BaldersGait.Services.Interface;
 using BaldersGait.ViewModels.Panels.BarberShop;
 
@@ -9,6 +9,8 @@ public class BarberShopPanelViewModel(IStateService stateService) : PanelBase
 {
     public override string PanelName => "Barber Shop";
     public override IBrush PanelButtonBackgroundColor { get; } = Brushes.SteelBlue;
+    
+    public override bool IsVisible => true;
 
     public BarberShopChairViewModel ChairOne { get; init; } = new(stateService, ChairNumbers.One);
     public BarberShopChairViewModel ChairTwo { get; init; } = new(stateService, ChairNumbers.Two);

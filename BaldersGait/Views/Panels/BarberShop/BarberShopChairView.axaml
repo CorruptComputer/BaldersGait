@@ -57,7 +57,7 @@
                 
                 
                         <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="8" Source="avares://BaldersGait/Assets/bald-head.png" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Classes="ChairStats" Text="{Binding HairGrowthLabel}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Classes="ChairStats" Text="{Binding BaseGrowthLabel}" />
                 
                         <TextBlock Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" Classes="ChairStats" Text="{Binding ScalingFactorLabel}" />
                 

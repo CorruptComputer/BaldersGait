@@ -7,6 +7,8 @@ public class GameStatePanelViewModel(IStateService stateService) : PanelBase
 {
     public override string PanelName => "Game State";
     public override IBrush PanelButtonBackgroundColor { get; } = Brushes.DarkRed;
+    
+    public override bool IsVisible => true;
 
 
     #region Click Events

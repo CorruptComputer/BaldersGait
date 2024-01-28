@@ -7,4 +7,6 @@ public abstract class PanelBase : ViewModelBase
     public abstract string PanelName { get; }
 
     public abstract IBrush PanelButtonBackgroundColor { get; }
+    
+    public abstract bool IsVisible { get; }
 }

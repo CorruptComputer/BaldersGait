@@ -21,11 +21,8 @@
     
     <Grid RowDefinitions="200,*">
         <Grid Grid.Row="0" RowDefinitions="*,*,*" Background="Beige">
-            <Border Grid.Row="0">
-                <TextBlock Classes="Info" Text="{Binding HairCollectedLabel}" />
-            </Border>
-            
-            <TextBlock Grid.Row="1" />
+            <TextBlock Grid.Row="0" Classes="Info" Text="{Binding HairCollectedLabel}" />
+            <TextBlock Grid.Row="1" Classes="Info" Text="{Binding MoneyCollectedLabel}" IsVisible="{Binding MoneyCollectedVisible}" />
             <TextBlock Grid.Row="2" />
         </Grid>
         <ItemsControl Grid.Row="1" ItemsSource="{Binding Buttons}" FontSize="24" />

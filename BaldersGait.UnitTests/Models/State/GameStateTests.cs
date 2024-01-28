@@ -1,13 +1,13 @@
-using BaldersGait.Models.State;
+using BaldersGait.Models;
 
 namespace BaldersGait.UnitTests.Models.State;
 
-public class BarberShopStateTests
+public class GameStateTests
 {
     [Fact]
     public void TickMe_ShouldNotThrow()
     {
-        BarberShopState state = new();
+        GameState state = new();
         Action act = () => state.TickMe();
 
         act.Should().NotThrow();

@@ -1,5 +1,4 @@
 ﻿using BaldersGait.Models.Enums;
-using BaldersGait.Services.Interface;
 using BaldersGait.ViewModels.Panels;
 using BaldersGait.ViewModels.Sidebar;
 using ReactiveUI;
@@ -33,7 +32,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public MainWindowViewModel(SidebarViewModel sidebar, IStateService stateService)
+    public MainWindowViewModel(SidebarViewModel sidebar)
     {
         if (Current != null)
         {
