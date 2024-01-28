@@ -12,10 +12,10 @@ public class SidebarViewModel(
     GameStatePanelViewModel gameStatePanel,
     IStateService stateService) : ViewModelBase
 {
-    public string HairCollectedLabel => $"Hair collected:\n{stateService.GetGameState().HairCollected:F2}\"";
+    public string HairCollectedLabel => $"Hair collected:\n{stateService.GetGameState().HairCollected:#,##0.##}\"";
 
     public bool MoneyCollectedVisible => stateService.GetGameState().IsMoneyVisible;
-    public string MoneyCollectedLabel => $"Money collected:\n${stateService.GetGameState().MoneyCollected:F2}";
+    public string MoneyCollectedLabel => $"Money collected:\n${stateService.GetGameState().MoneyCollected:#,##0.##}";
 
     public List<SidebarButtonViewModel> Buttons { get; } =
     [
