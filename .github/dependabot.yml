@@ -5,20 +5,4 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 10
-    groups:
-      Avalonia:
-        patterns:
-        - "*Avalonia*"
-      Serilog:
-        patterns:
-        - "*Serilog*"
-      Autofac:
-        patterns:
-        - "*Autofac*"
-      Testing:
-        patterns:
-        - "coverlet.*"
-        - "xunit*"
-        - "FluentAssertions"
-        - "Microsoft.NET.Test.Sdk"
+    open-pull-requests-limit: 25
