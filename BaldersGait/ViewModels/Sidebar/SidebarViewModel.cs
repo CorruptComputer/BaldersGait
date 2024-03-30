@@ -8,23 +8,24 @@ namespace BaldersGait.ViewModels.Sidebar;
 public class SidebarViewModel(
     BarberShopPanelViewModel barberShopPanel,
     UpgradeShopPanelViewModel upgradeShopPanel,
-    WigShopPanelViewModel wigShopPanel,
+    CompanyPanelViewModel companyPanel,
     GameStatePanelViewModel gameStatePanel,
-    IStateService stateService) : ViewModelBase
+    IStateService stateService,
+    bool autoRefreshUi = true) : ViewModelBase(autoRefreshUi)
 {
-    public string HairCollectedLabel => $"Hair collected:\n{stateService.GetGameState().HairCollected:#,##0.##}\"";
+    public string HairCollectedLabel => $"Hair collected:\n{stateService.SavedState.HairCollected:#,##0.##}\"";
 
-    public bool MoneyCollectedVisible => stateService.GetGameState().IsMoneyVisible;
-    public string MoneyCollectedLabel => $"Money collected:\n${stateService.GetGameState().MoneyCollected:#,##0.##}";
+    public bool MoneyCollectedVisible => stateService.CalculatedState.IsMoneyVisible;
+    public string MoneyCollectedLabel => $"Money collected:\n${stateService.SavedState.MoneyCollected:#,##0.##}";
 
     public List<SidebarButtonViewModel> Buttons { get; } =
     [
-        new(barberShopPanel),
-        new(upgradeShopPanel),
-        new(wigShopPanel),
-        new(gameStatePanel),
-        new("Roadmap \ud83d\udd17", Brushes.DarkSlateGray, "https://github.com/users/CorruptComputer/projects/3/views/1"),
-        new("Source \ud83d\udd17", Brushes.DarkSlateGray, "https://github.com/CorruptComputer/BaldersGait")
+        new(barberShopPanel, autoRefreshUi),
+        new(upgradeShopPanel, autoRefreshUi),
+        new(companyPanel, autoRefreshUi),
+        new(gameStatePanel, autoRefreshUi),
+        new("Roadmap \ud83d\udd17", Brushes.DarkSlateGray, "https://github.com/users/CorruptComputer/projects/3/views/1", autoRefreshUi),
+        new("Source \ud83d\udd17", Brushes.DarkSlateGray, "https://github.com/CorruptComputer/BaldersGait", autoRefreshUi)
     ];
 
     protected override void RefreshUIFromState()

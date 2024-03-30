@@ -4,9 +4,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="750"
-             x:Class="BaldersGait.Views.Panels.WigShopPanelView"
-             x:DataType="vm:WigShopPanelViewModel">
+             x:Class="BaldersGait.Views.Panels.CompanyPanelView"
+             x:DataType="vm:CompanyPanelViewModel">
     <Design.DataContext>
-        <vm:WigShopPanelViewModel/>
+        <vm:CompanyPanelViewModel/>
     </Design.DataContext>
 </UserControl>

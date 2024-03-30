@@ -9,7 +9,9 @@ namespace BaldersGait.Services;
 
 public class StateService : IStateService
 {
-    private GameState GameState { get; set; } = new();
+    public CalculatedGameState CalculatedState { get; private set; } = new();
+
+    public SavedGameState SavedState { get; private set; } = new();
 
     private const string SaveFileName = "GameState.1";
     private string SaveFilePath => Path.Combine(_environmentService.GetUserdataDirectory(), SaveFileName);
@@ -31,11 +33,6 @@ public class StateService : IStateService
         }
     }
 
-    public GameState GetGameState()
-    {
-        return GameState;
-    }
-
     public bool LoadState(bool resetState = false)
     {
         if (!resetState)
@@ -44,7 +41,7 @@ public class StateService : IStateService
             {
                 try
                 {
-                    GameState = JsonSerializer.Deserialize<GameState>(File.ReadAllText(SaveFilePath)) ?? throw new SerializationException();
+                    SavedState = JsonSerializer.Deserialize<SavedGameState>(File.ReadAllText(SaveFilePath)) ?? throw new SerializationException();
                     return true;
                 }
                 catch (Exception e) when (e is JsonException or SerializationException)
@@ -57,7 +54,7 @@ public class StateService : IStateService
             {
                 try
                 {
-                    GameState = JsonSerializer.Deserialize<GameState>(File.ReadAllText(BackupFilePath)) ?? throw new SerializationException();
+                    SavedState = JsonSerializer.Deserialize<SavedGameState>(File.ReadAllText(BackupFilePath)) ?? throw new SerializationException();
                     return true;
                 }
                 catch (Exception e) when (e is JsonException or SerializationException)
@@ -68,7 +65,7 @@ public class StateService : IStateService
         }
 
         Log.Information($"Creating new save.");
-        GameState = new();
+        SavedState = new();
 
         return false;
     }
@@ -82,7 +79,7 @@ public class StateService : IStateService
                 File.Move(SaveFilePath, BackupFilePath, overwrite: true);
             }
 
-            File.WriteAllText(SaveFilePath, JsonSerializer.Serialize(GameState));
+            File.WriteAllText(SaveFilePath, JsonSerializer.Serialize(SavedState));
             return true;
         }
         catch (Exception e) when (e is IOException)
@@ -95,6 +92,50 @@ public class StateService : IStateService
 
     public void TickState()
     {
-        GameState.TickMe();
+        CalculatedState.SetBaseHairPerTick(SavedState.HairGrowthV1Upgrades);
+        CalculatedState.SetIsStylistsButtonVisible(SavedState.StylistsPurchased);
+        CalculatedState.SetIsMoneyVisible(SavedState.CompanyPurchased);
+        CalculatedState.SetIsWigShopButtonVisible(SavedState.CompanyPurchased);
+        CalculatedState.SetIsHairGrowthV1UpgradesMaxed(SavedState.HairGrowthV1Upgrades);
+        CalculatedState.SetIsScalingFactorV1UpgradesMaxed(SavedState.ScalingFactorV1Upgrades);
+        CalculatedState.SetIsMaxHairV1UpgradesMaxed(SavedState.MaxHairV1Upgrades);
+
+        Parallel.ForEach(SavedState.Chairs.Where(x => x.Unlocked), seat =>
+        {
+            double hairGrowth = seat.GetHairGrowthWithScalingFactor(CalculatedState.BaseHairPerTick, SavedState.ScalingFactorV1Upgrades);
+            double maxHairLength = seat.GetMaxHairLength(SavedState.MaxHairV1Upgrades);
+
+            // If we are making more per tick than we can hold
+            if (hairGrowth > maxHairLength)
+            {
+                seat.HairLength = maxHairLength;
+
+                if (SavedState.ClippersPurchased)
+                {
+                    SavedState.HairCollected = Math.Round(SavedState.HairCollected + seat.HairLength, 3);
+                }
+
+                return;
+            }
+
+            // If we are full
+            if (seat.HairLength >= maxHairLength)
+            {
+                if (SavedState.ClippersPurchased)
+                {
+                    SavedState.HairCollected = Math.Round(SavedState.HairCollected + maxHairLength, 3);
+                    seat.HairLength = 0;
+                }
+                else
+                {
+                    seat.HairLength = maxHairLength;
+                }
+
+                return;
+            }
+
+            // Else we can add it to the seats hair length
+            seat.HairLength = Math.Round(seat.HairLength + hairGrowth, 3);
+        });
     }
 }

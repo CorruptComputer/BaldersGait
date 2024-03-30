@@ -4,11 +4,11 @@ namespace BaldersGait.Services.Interface;
 
 public interface IStateService
 {
-    public GameState GetGameState();
+    public CalculatedGameState CalculatedState { get; }
+
+    public SavedGameState SavedState { get; }
 
     public bool LoadState(bool resetState = false);
 
     public bool SaveState();
-
-    public void TickState();
 }

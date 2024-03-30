@@ -16,7 +16,7 @@ public class BarberShopChair
     {
         const double baseScalingFactor = 1;
         double actualScalingFactor = baseScalingFactor + (0.1 * scalingFactorUpgrades);
-        
+
         if (ChairNumber != ChairNumbers.One)
         {
             // Apply Chair Penalty
@@ -29,10 +29,10 @@ public class BarberShopChair
                 actualScalingFactor *= StylistAssigned.MultiplicativeScalingFactorBonus;
             }
         }
-        
+
         return Math.Round(actualScalingFactor, 3);
     }
-    
+
     public double GetHairGrowthWithScalingFactor(double baseHairGrowthPerTick, int scalingFactorUpgrades)
     {
         double hairGrowth = baseHairGrowthPerTick;
@@ -46,10 +46,10 @@ public class BarberShopChair
         {
             hairGrowth *= GetHairGrowthScalingFactor(scalingFactorUpgrades);
         }
-        
+
         return Math.Round(hairGrowth, 3);
     }
-    
+
     public double GetMaxHairLength(int maxHairUpgrades)
     {
         double maxHair = 10 * (maxHairUpgrades + 1);
@@ -58,10 +58,10 @@ public class BarberShopChair
         {
             maxHair *= StylistAssigned.MultiplicativeMaxHairBonus;
         }
-        
+
         return maxHair;
     }
-    
+
     public bool IsReadyToCollect(int maxHairUpgrades)
     {
         return HairLength >= GetMaxHairLength(maxHairUpgrades);

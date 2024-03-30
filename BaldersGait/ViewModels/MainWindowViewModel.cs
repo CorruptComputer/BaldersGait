@@ -32,7 +32,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public MainWindowViewModel(SidebarViewModel sidebar)
+    public MainWindowViewModel(SidebarViewModel sidebar, bool autoRefreshUi = true) : base(autoRefreshUi)
     {
         if (Current != null)
         {

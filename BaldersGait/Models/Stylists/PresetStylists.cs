@@ -10,41 +10,43 @@ public static class PresetStylists
             Preset = true,
             Name = "Copyright",
             BaseCostPerHour = 100,
-            
+
             HairGrowthSpeedBonusRarity = Rarity.Rare,
             AdditiveHairGrowthSpeedBonus = 100.0,
-            
+
             ScalingFactorBonusRarity = Rarity.Special,
             MultiplicativeScalingFactorBonus = 3.0,
-            
+
             MaxHairBonusRarity = Rarity.Rare,
             MultiplicativeMaxHairBonus = 2.5
         },
         new()
         {
+            Preset = true,
             Name = "Skeleton Man",
             BaseCostPerHour = 100,
-            
+
             HairGrowthSpeedBonusRarity = Rarity.Rare,
             AdditiveHairGrowthSpeedBonus = 100.0,
-            
+
             ScalingFactorBonusRarity = Rarity.Special,
             MultiplicativeScalingFactorBonus = 3.0,
-            
+
             MaxHairBonusRarity = Rarity.Rare,
             MultiplicativeMaxHairBonus = 2.5
         },
         new()
         {
+            Preset = true,
             Name = "Saeryn",
             BaseCostPerHour = 100,
-            
+
             HairGrowthSpeedBonusRarity = Rarity.Special,
             AdditiveHairGrowthSpeedBonus = 125.0,
-            
+
             ScalingFactorBonusRarity = Rarity.Rare,
-            MultiplicativeScalingFactorBonus = 2.5, 
-            
+            MultiplicativeScalingFactorBonus = 2.5,
+
             MaxHairBonusRarity = Rarity.Rare,
             MultiplicativeMaxHairBonus = 2.5
         },

@@ -21,7 +21,7 @@ public class SidebarButtonViewModel : ViewModelBase
 
     public string? LinkUrl { get; init; }
 
-    public SidebarButtonViewModel(PanelBase panelToOpen)
+    public SidebarButtonViewModel(PanelBase panelToOpen, bool autoRefreshUi = true) : base(autoRefreshUi)
     {
         ButtonType = ButtonTypes.Panel;
         PanelToOpen = panelToOpen;
@@ -29,7 +29,7 @@ public class SidebarButtonViewModel : ViewModelBase
         BackgroundColor = panelToOpen.PanelButtonBackgroundColor;
     }
 
-    public SidebarButtonViewModel(string text, IBrush background, string linkUrl)
+    public SidebarButtonViewModel(string text, IBrush background, string linkUrl, bool autoRefreshUi = true) : base(autoRefreshUi)
     {
         ButtonType = ButtonTypes.Link;
         ButtonText = text;

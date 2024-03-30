@@ -3,11 +3,11 @@ using BaldersGait.Services.Interface;
 
 namespace BaldersGait.ViewModels.Panels;
 
-public class GameStatePanelViewModel(IStateService stateService) : PanelBase
+public class GameStatePanelViewModel(IStateService stateService, bool autoRefreshUi = true) : PanelBase(autoRefreshUi)
 {
     public override string PanelName => "Game State";
     public override IBrush PanelButtonBackgroundColor { get; } = Brushes.DarkRed;
-    
+
     public override bool IsVisible => true;
 
 

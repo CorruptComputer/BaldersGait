@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace BaldersGait.Views.Panels;
 
-public partial class WigShopPanelView : UserControl
+public partial class CompanyPanelView : UserControl
 {
-    public WigShopPanelView()
+    public CompanyPanelView()
     {
         InitializeComponent();
     }
