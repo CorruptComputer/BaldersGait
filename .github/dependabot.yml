@@ -8,23 +8,23 @@ updates:
     groups:
       autofac:
         patterns:
-          - "^Autofac"
-          - "^Autofac.*"
+          - "Autofac"
+          - "Autofac.*"
       avalonia:
         patterns:
-          - "^Avalonia"
-          - "^Avalonia.*"
+          - "Avalonia"
+          - "Avalonia.*"
       serilog:
         patterns:
-          - "^Serilog"
-          - "^Serilog.*"
+          - "Serilog"
+          - "Serilog.*"
       testing:
         patterns:
-          - "^FluentAssertions"
-          - "^Microsoft.NET.Test.Sdk"
-          - "^xunit"
-          - "^xunit.*"
-          - "^coverlet.collector"
+          - "FluentAssertions"
+          - "Microsoft.NET.Test.Sdk"
+          - "xunit"
+          - "xunit.*"
+          - "coverlet.collector"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
