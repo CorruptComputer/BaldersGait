@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - 'develop'
+  pull_request:
+    branches:
+      - 'develop'
   workflow_dispatch:
+    
 
 env:
   DOTNET_VERSION: '8.0.x'
