@@ -6,26 +6,14 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      autofac:
+      nuget:
         patterns:
-          - "Autofac"
-          - "Autofac.*"
-      avalonia:
-        patterns:
-          - "Avalonia"
-          - "Avalonia.*"
-      serilog:
-        patterns:
-          - "Serilog"
-          - "Serilog.*"
-      testing:
-        patterns:
-          - "FluentAssertions"
-          - "Microsoft.NET.Test.Sdk"
-          - "xunit"
-          - "xunit.*"
-          - "coverlet.collector"
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      actions:
+        patterns:
+          - "*"

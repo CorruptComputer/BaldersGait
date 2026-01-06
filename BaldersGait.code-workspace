@@ -1,0 +1,68 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "BaldersGait.sln"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-dotnettools.csharp",
+            "ms-dotnettools.vscode-dotnet-runtime",
+            "github.vscode-github-actions"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Debug BaldersGait",
+                "type": "coreclr",
+                "request": "launch",
+                "preLaunchTask": "build",
+                "program": "${workspaceFolder}/BaldersGait/bin/Debug/net8.0/BaldersGait.dll",
+                "args": [],
+                "cwd": "${workspaceFolder}/BaldersGait",
+                "console": "internalConsole",
+                "stopAtEntry": false
+            },
+            {
+                "name": "Debug Everything",
+                "type": "coreclr",
+                "request": "launch",
+                "preLaunchTask": "build",
+                "program": "${workspaceFolder}/BaldersGait/bin/Debug/net8.0/BaldersGait.dll",
+                "args": [],
+                "cwd": "${workspaceFolder}/BaldersGait",
+                "console": "internalConsole",
+                "stopAtEntry": false,
+                // Above this should all be the same as the first configuration
+                "justMyCode":false,
+                "symbolOptions": {
+                    "searchPaths": [],
+                    "searchMicrosoftSymbolServer": true,
+                    "searchNuGetOrgSymbolServer": true
+                }
+            }
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "build",
+                "command": "dotnet",
+                "type": "process",
+                "args": [
+                "build",
+                "${workspaceFolder}/BaldersGait.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+                ],
+                "problemMatcher": "$msCompile"
+            }
+        ]
+    }
+}

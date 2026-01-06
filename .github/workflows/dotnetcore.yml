@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - '*'
-  workflow_dispatch: 
+  workflow_dispatch:
 
 env:
   DOTNET_VERSION: '8.0.x'
@@ -19,8 +19,8 @@ jobs:
     steps:
       # Setup
       - name: Checkout Repo
-        uses: actions/checkout@v5
-        
+        uses: actions/checkout@v6
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
@@ -38,31 +38,31 @@ jobs:
     steps:
       # Setup
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-      
+
       # Build
       - name: Build
         run: |
           dotnet publish --configuration Release --runtime linux-x64 --property PublishDir=~/publish
-          
+
       # Upload
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: BaldersGait-linux-x64
           path: ~/publish
-          
+
   build-windows:
     name: Build Windows
     runs-on: windows-latest
     steps:
       # Setup
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
@@ -75,7 +75,7 @@ jobs:
 
       # Upload
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: BaldersGait-win-x64
           path: D:\a\BaldersGait\BaldersGait\BaldersGait\publish\
