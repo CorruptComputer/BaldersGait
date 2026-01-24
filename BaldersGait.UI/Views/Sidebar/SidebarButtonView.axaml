@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BaldersGait.UI.ViewModels.Sidebar"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="750"
+             x:Class="BaldersGait.UI.Views.Sidebar.SidebarButtonView"
+             x:DataType="vm:SidebarButtonViewModel">
+    <Design.DataContext>
+        <vm:SidebarButtonViewModel/>
+    </Design.DataContext>
+
+    <Button Background="{Binding BackgroundColor}" Command="{Binding OnClick}" IsVisible="{Binding IsVisible}">
+        <TextBlock Text="{Binding ButtonText}" TextAlignment="Center" />
+    </Button>
+</UserControl>

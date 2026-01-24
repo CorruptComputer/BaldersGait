@@ -9,9 +9,6 @@ on:
       - '*'
   workflow_dispatch:
 
-env:
-  DOTNET_VERSION: '8.0.x'
-
 jobs:
   test:
     name: Test
@@ -21,10 +18,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v6
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Setup Environment
+        uses: ./.github/actions/setup-env
 
       # Test
       - name: Unit Tests
@@ -39,10 +34,9 @@ jobs:
       # Setup
       - name: Checkout repo
         uses: actions/checkout@v6
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-env
 
       # Build
       - name: Build
@@ -63,10 +57,9 @@ jobs:
       # Setup
       - name: Checkout repo
         uses: actions/checkout@v6
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-env
 
       # Build
       - name: Build

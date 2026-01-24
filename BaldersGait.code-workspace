@@ -22,9 +22,9 @@
                 "type": "coreclr",
                 "request": "launch",
                 "preLaunchTask": "build",
-                "program": "${workspaceFolder}/BaldersGait/bin/Debug/net8.0/BaldersGait.dll",
+                "program": "${workspaceFolder}/BaldersGait.UI/bin/Debug/net10.0/BaldersGait.UI.dll",
                 "args": [],
-                "cwd": "${workspaceFolder}/BaldersGait",
+                "cwd": "${workspaceFolder}/BaldersGait.UI",
                 "console": "internalConsole",
                 "stopAtEntry": false
             },
@@ -33,9 +33,9 @@
                 "type": "coreclr",
                 "request": "launch",
                 "preLaunchTask": "build",
-                "program": "${workspaceFolder}/BaldersGait/bin/Debug/net8.0/BaldersGait.dll",
+                "program": "${workspaceFolder}/BaldersGait.UI/bin/Debug/net10.0/BaldersGait.UI.dll",
                 "args": [],
-                "cwd": "${workspaceFolder}/BaldersGait",
+                "cwd": "${workspaceFolder}/BaldersGait.UI",
                 "console": "internalConsole",
                 "stopAtEntry": false,
                 // Above this should all be the same as the first configuration
